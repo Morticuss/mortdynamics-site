@@ -3,254 +3,993 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MortDynamics</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@600;800&display=swap" rel="stylesheet">
-
+<title>MortDynamics — Software Services for UK Businesses</title>
+<meta name="description" content="MortDynamics helps UK businesses automate manual work, fix broken systems, build custom tools, and connect the software they already use.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: #0b0b0c;
-  color: #eaeaea;
-  line-height: 1.6;
-}
+  :root {
+    --bg: #F8F8F6;
+    --surface: #FFFFFF;
+    --ink: #0D0D0D;
+    --ink-mid: #3A3A3A;
+    --ink-soft: #5A5A5A;
+    --navy: #0F1F3D;
+    --navy-hover: #1A3560;
+    --navy-deep: #0A1628;
+    --tag-bg: #EEF3FC;
+    --tag-border: #C8D8F0;
+    --tag-text: #1A3560;
+    --border: #E4E4E0;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'DM Sans', sans-serif;
+    --radius: 12px;
+    --container: 1100px;
+  }
 
-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(11,11,12,0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  z-index: 100;
-}
+  html { scroll-behavior: smooth; font-size: 17px; }
 
-.logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 1.1rem;
-}
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-.logo span { color: #d6c28a; }
+  /* ── UTILITIES ── */
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
-nav a {
-  color: #aaa;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.2s;
-}
+  .section-label {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
 
-nav a:hover { color: #fff; }
+  .tag {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    color: var(--tag-text);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 0 24px;
-}
+  .tag-neutral {
+    background: #F0F0EC;
+    border-color: #DDDDD8;
+    color: var(--ink-mid);
+  }
 
-section {
-  padding: 120px 0;
-}
+  h2.section-heading {
+    font-family: var(--serif);
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
 
-.hero {
-  padding-top: 160px;
-}
+  .section-sub {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 560px;
+    line-height: 1.7;
+  }
 
-h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
+  .btn-primary {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 200ms ease, transform 200ms ease;
+  }
+  .btn-primary:hover { background: var(--navy-hover); transform: translateY(-1px); }
 
-h2 {
-  font-family: 'Syne', sans-serif;
-  font-size: 2rem;
-  margin-bottom: 16px;
-}
+  .btn-ghost {
+    display: inline-block;
+    background: transparent;
+    color: var(--navy);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 28px;
+    border-radius: 8px;
+    border: 1.5px solid var(--navy);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 200ms ease, transform 200ms ease;
+  }
+  .btn-ghost:hover { background: rgba(15,31,61,0.05); transform: translateY(-1px); }
 
-p {
-  color: #9a9a9a;
-  max-width: 620px;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 28px;
-  background: linear-gradient(135deg, #e8d5a3, #cbb57a);
-  color: #000;
-  padding: 12px 24px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: transform 0.2s, opacity 0.2s;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
-}
-
-.grid {
-  display: grid;
-  gap: 20px;
-  margin-top: 40px;
-}
-
-.card {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 14px;
-  padding: 24px;
-  transition: all 0.25s ease;
-}
-
-.card:hover {
-  border-color: rgba(255,255,255,0.15);
-  transform: translateY(-3px);
-}
-
-.price {
-  font-size: 1.8rem;
-  font-family: 'Syne', sans-serif;
-  color: #e8d5a3;
-  margin: 10px 0;
-}
-
-.small {
-  font-size: 0.85rem;
-  color: #777;
-}
-
-.contact-box {
-  margin-top: 24px;
-  padding: 20px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-footer {
-  border-top: 1px solid rgba(255,255,255,0.05);
-  padding: 40px 20px;
-  text-align: center;
-  color: #666;
-  font-size: 0.85rem;
-}
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.8s forwards;
-}
-
-@keyframes fadeIn {
-  to {
+  /* ── FADE-IN ANIMATION ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 550ms ease, transform 550ms ease;
+  }
+  .fade-up.visible {
     opacity: 1;
     transform: translateY(0);
   }
-}
 
-@media (min-width: 768px) {
-  .grid-2 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3 { grid-template-columns: repeat(3, 1fr); }
-}
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 64px;
+    background: rgba(248,248,246,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 300ms ease;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.07); }
 
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+  .nav-links a:hover { color: var(--navy); }
+
+  .nav-cta { margin-left: 8px; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: all 250ms ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 99;
+    padding: 24px;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink-mid);
+    text-decoration: none;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 200ms ease;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--navy); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 64px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero-dot-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(15,31,61,0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    padding: 80px 24px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    color: var(--tag-text);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4A90D9;
+    flex-shrink: 0;
+  }
+
+  .hero-h1 {
+    font-family: var(--serif);
+    font-size: clamp(38px, 6.5vw, 68px);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--navy);
+  }
+
+  .hero-para {
+    font-size: 18px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 40px;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hero-text-link {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--navy);
+    text-decoration: none;
+    padding: 14px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 200ms ease;
+  }
+  .hero-text-link:hover { gap: 10px; }
+
+  /* Hero stagger */
+  .hero-content .hero-badge { transition-delay: 0ms; }
+  .hero-content .hero-h1 { transition-delay: 100ms; }
+  .hero-content .hero-para { transition-delay: 200ms; }
+  .hero-content .hero-cta-row { transition-delay: 300ms; }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 120px 0; }
+
+  .section-header { margin-bottom: 64px; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--surface); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .service-card .tag { margin-bottom: 20px; }
+
+  .service-card h3 {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .service-card .summary {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .service-card p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* ── WORK ── */
+  #work { background: var(--bg); }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .work-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .work-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+  }
+
+  .work-card .tag { margin-bottom: 20px; }
+
+  .work-card h3 {
+    font-family: var(--sans);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .work-card p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* ── PRICING ── */
+  #pricing { background: var(--surface); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .pricing-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    position: relative;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .pricing-card.featured {
+    background: var(--surface);
+    border: 1.5px solid var(--navy);
+    box-shadow: 0 8px 32px rgba(15,31,61,0.1);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--navy);
+    color: white;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .pricing-tier {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  .pricing-range {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .pricing-terms {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pricing-suitable {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .pricing-suitable strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .pricing-card .btn-primary,
+  .pricing-card .btn-ghost { width: 100%; text-align: center; }
+
+  .pricing-note {
+    text-align: center;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 40px;
+    line-height: 1.6;
+  }
+
+  /* ── PROCESS ── */
+  #process { background: var(--bg); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    position: relative;
+  }
+
+  .process-step {
+    padding: 40px 36px;
+    position: relative;
+  }
+
+  .process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 52px;
+    right: 0;
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  .step-number {
+    font-family: var(--serif);
+    font-size: 72px;
+    font-weight: 400;
+    color: #E8E8E4;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.04em;
+  }
+
+  .process-step h3 {
+    font-family: var(--sans);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .process-step p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--navy);
+    padding: 120px 0;
+  }
+
+  #contact .section-label { color: rgba(255,255,255,0.45); }
+
+  #contact h2 {
+    font-family: var(--serif);
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  #contact .contact-para {
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    max-width: 540px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 44px;
+  }
+
+  .contact-detail-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-size: 15px;
+  }
+
+  .contact-detail-label {
+    font-weight: 600;
+    color: rgba(255,255,255,0.45);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    min-width: 110px;
+  }
+
+  .contact-detail-value {
+    color: rgba(255,255,255,0.85);
+  }
+
+  .contact-detail-value a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(255,255,255,0.3);
+    transition: text-decoration-color 200ms ease;
+  }
+  .contact-detail-value a:hover { text-decoration-color: rgba(255,255,255,0.8); }
+
+  .contact-cta-btn {
+    display: inline-block;
+    background: #fff;
+    color: var(--navy);
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 200ms ease, transform 200ms ease;
+    margin-bottom: 20px;
+  }
+  .contact-cta-btn:hover { background: #F0F0EC; transform: translateY(-1px); }
+
+  .contact-fine-print {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+    max-width: 460px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-deep);
+    padding: 28px 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    section { padding: 80px 0; }
+
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    .services-grid,
+    .work-grid { grid-template-columns: 1fr; }
+
+    .pricing-grid { grid-template-columns: 1fr; }
+
+    .process-steps { grid-template-columns: 1fr; }
+    .process-step:not(:last-child)::after { display: none; }
+    .process-step { padding: 32px 0; border-bottom: 1px solid var(--border); }
+    .process-step:last-child { border-bottom: none; }
+
+    .hero-h1 { font-size: clamp(34px, 9vw, 52px); }
+
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-cta-row { flex-direction: column; align-items: stretch; text-align: center; }
+    .hero-text-link { justify-content: center; }
+  }
 </style>
 </head>
-
 <body>
 
-<nav>
-  <div class="logo">Mort<span>Dynamics</span></div>
-  <a href="#contact">Contact</a>
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">MortDynamics</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn-primary nav-cta" style="padding:10px 20px;font-size:14px;">Get in Touch</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<section class="hero">
-  <div class="container fade-in">
-    <h1>Custom software built to solve real operational problems</h1>
-    <p>
-      MortDynamics provides automation, system fixes, and custom tools designed to remove inefficiencies and improve how businesses operate.
-      Based in the UK. Response time within 48 hours.
-    </p>
-    <a href="#contact" class="btn">Get in touch</a>
-  </div>
-</section>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#process">Process</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" style="color:var(--navy);font-weight:700;border-bottom:none;margin-top:8px;">Get in Touch →</a>
+</div>
 
-<section>
-  <div class="container">
-    <h2>Services</h2>
-    <div class="grid grid-2">
-      <div class="card fade-in"><strong>Automation</strong><p>Reduction of manual processes including reporting, communication, and data handling.</p></div>
-      <div class="card fade-in"><strong>System fixes</strong><p>Diagnosis and resolution of broken or unreliable systems.</p></div>
-      <div class="card fade-in"><strong>Custom tools</strong><p>Development of internal tools and lightweight applications.</p></div>
-      <div class="card fade-in"><strong>Integrations</strong><p>Connecting platforms to ensure consistent data flow.</p></div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-dot-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up">UK-Based Software Services</div>
+    <h1 class="hero-h1 fade-up">Your business runs on systems.<br><em>We make sure they work.</em></h1>
+    <p class="hero-para fade-up">MortDynamics helps UK businesses cut out manual work, fix the systems slowing them down, and build the tools they actually need. Fixed pricing. Clear scope. Work that gets done.</p>
+    <div class="hero-cta-row fade-up">
+      <a href="#contact" class="btn-primary">Tell us what you need</a>
+      <a href="#process" class="hero-text-link">See how it works <span>→</span></a>
     </div>
   </div>
 </section>
 
-<section>
+<!-- SERVICES -->
+<section id="services">
   <div class="container">
-    <h2>Example work</h2>
-    <div class="grid grid-2">
-      <div class="card fade-in"><strong>Invoice reminder automation</strong><p>Automated follow up system for unpaid invoices.</p></div>
-      <div class="card fade-in"><strong>Booking system repair</strong><p>Resolved issues preventing customer enquiries.</p></div>
-      <div class="card fade-in"><strong>Shift management tool</strong><p>Replaced spreadsheets with a simple web interface.</p></div>
-      <div class="card fade-in"><strong>Reporting automation</strong><p>Generated scheduled reports from multiple sources.</p></div>
+    <div class="section-header fade-up">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-heading">Four things, done properly.</h2>
+      <p class="section-sub">We keep the scope tight. We do the work well. No retainers, no unnecessary complexity.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <span class="tag tag-neutral">Automation</span>
+        <h3>Automate the repetitive work</h3>
+        <p class="summary">Stop doing manually what a system can handle.</p>
+        <p>If your team spends time copying data between spreadsheets, chasing the same emails each week, or running the same reports by hand — we build the process that does it automatically, reliably, every time.</p>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:80ms">
+        <span class="tag tag-neutral">System Fixes</span>
+        <h3>Fix what is broken</h3>
+        <p class="summary">A broken system costs you money every single day.</p>
+        <p>We diagnose the problem, fix it properly, and make sure it does not come back. No guesswork, no temporary patches, no handing it back without verifying it actually works.</p>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:120ms">
+        <span class="tag tag-neutral">Custom Tools</span>
+        <h3>Build what you actually need</h3>
+        <p class="summary">Off-the-shelf software rarely fits your exact process.</p>
+        <p>We build lightweight internal tools — dashboards, admin panels, booking systems, staff portals — designed around how your business works, not the other way around.</p>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:160ms">
+        <span class="tag tag-neutral">Integrations</span>
+        <h3>Connect your systems</h3>
+        <p class="summary">Your tools should share data without you in the middle.</p>
+        <p>We connect your CRM, accounting software, booking platform, or any other system so information flows where it needs to go — automatically, without manual exports or copy-pasting.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
+<!-- WORK -->
+<section id="work">
   <div class="container">
-    <h2>Pricing</h2>
-    <div class="grid grid-3">
-      <div class="card fade-in">
-        <strong>Small</strong>
-        <div class="price">£300 to £600</div>
-        <p>Smaller fixes and automations.</p>
-        <p class="small">No upfront payment. Paid after delivery.</p>
+    <div class="section-header fade-up">
+      <span class="section-label">Work We Have Done</span>
+      <h2 class="section-heading">Real problems. Practical results.</h2>
+      <p class="section-sub">A few examples of the kind of work we take on. No client names — just the problem and what we did about it.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-card fade-up">
+        <span class="tag">Automation</span>
+        <h3>Automated invoice reminders</h3>
+        <p>A professional services firm was manually emailing overdue invoice reminders each week. We connected their invoicing software to an automated workflow — reminders now go out on the correct schedule without anyone touching them, and overdue payments have reduced noticeably.</p>
       </div>
-      <div class="card fade-in">
-        <strong>Medium</strong>
-        <div class="price">£800 to £1,500</div>
-        <p>Tools and integrations.</p>
-        <p class="small">30 percent upfront. Remaining after delivery.</p>
+      <div class="work-card fade-up" style="transition-delay:80ms">
+        <span class="tag">System Fix</span>
+        <h3>A booking system that kept losing appointments</h3>
+        <p>A small healthcare provider had a booking system that regularly failed to save appointments and stopped sending confirmation emails. We identified the root cause, rebuilt the broken integration, and put monitoring in place to catch issues before they affect patients.</p>
       </div>
-      <div class="card fade-in">
-        <strong>Large</strong>
-        <div class="price">£2,000+</div>
-        <p>Full systems or applications.</p>
-        <p class="small">30 percent upfront. Remaining agreed beforehand.</p>
+      <div class="work-card fade-up" style="transition-delay:120ms">
+        <span class="tag">Custom Tool</span>
+        <h3>Internal staff scheduling tool</h3>
+        <p>A logistics company was managing driver schedules and job assignments across three separate spreadsheets. We built a simple internal tool that centralised everything — one clear view for management, real-time updates, and no more spreadsheet conflicts.</p>
+      </div>
+      <div class="work-card fade-up" style="transition-delay:160ms">
+        <span class="tag">Integration</span>
+        <h3>End-of-day reporting, automated</h3>
+        <p>A retail business owner spent an hour every evening pulling sales data from their point-of-sale system and online store into a summary report. We automated the entire process. The report is in their inbox every evening without any manual work.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PRICING -->
+<section id="pricing" style="background:var(--surface);">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-heading">Transparent pricing. No surprises.</h2>
+      <p class="section-sub">Every project is quoted clearly before any work begins. You know exactly what you are paying and when.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up">
+        <p class="pricing-tier">Small Projects</p>
+        <p class="pricing-range">£300–£600</p>
+        <p class="pricing-terms">No upfront payment required. You pay once the work is delivered and you are satisfied with the result.</p>
+        <div class="pricing-suitable">
+          <strong>Suitable for</strong>
+          Fixes, small automations, and straightforward integrations.
+        </div>
+        <a href="#contact" class="btn-ghost">Get a quote</a>
+      </div>
+      <div class="pricing-card featured fade-up" style="transition-delay:80ms">
+        <div class="pricing-badge">Most common</div>
+        <p class="pricing-tier">Medium Projects</p>
+        <p class="pricing-range">£800–£1,500</p>
+        <p class="pricing-terms">30% upfront to begin work. The remainder is due on completion once everything is signed off.</p>
+        <div class="pricing-suitable">
+          <strong>Suitable for</strong>
+          Custom tools, multi-step automations, and system rebuilds.
+        </div>
+        <a href="#contact" class="btn-primary">Get a quote</a>
+      </div>
+      <div class="pricing-card fade-up" style="transition-delay:160ms">
+        <p class="pricing-tier">Large Projects</p>
+        <p class="pricing-range">£2,000+</p>
+        <p class="pricing-terms">30% upfront to begin. The rest is structured across agreed milestones throughout the project.</p>
+        <div class="pricing-suitable">
+          <strong>Suitable for</strong>
+          Complex builds, full integrations, and larger scoped work.
+        </div>
+        <a href="#contact" class="btn-ghost">Get a quote</a>
+      </div>
+    </div>
+    <p class="pricing-note fade-up">All prices are quoted in GBP. Payment is via UK bank transfer.<br>Full terms are agreed in writing before any work begins.</p>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">How It Works</span>
+      <h2 class="section-heading">Simple from start to finish.</h2>
+      <p class="section-sub">Three steps. No lengthy onboarding. No unnecessary process.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="step-number">01</div>
+        <h3>Contact</h3>
+        <p>Send us a message explaining what you need. You do not need a full brief — just describe the problem in plain language and we will take it from there.</p>
+      </div>
+      <div class="process-step fade-up" style="transition-delay:100ms">
+        <div class="step-number">02</div>
+        <h3>Scope</h3>
+        <p>We look at what needs doing, ask any questions, and send you a clear written scope with a fixed price. You decide whether to proceed. No pressure, no obligation.</p>
+      </div>
+      <div class="process-step fade-up" style="transition-delay:200ms">
+        <div class="step-number">03</div>
+        <h3>Build</h3>
+        <p>We do the work and keep you informed throughout. When it is done, we walk you through what has been built and make sure everything is working before you pay the final amount.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <h2>Contact</h2>
-    <p>Send a description of the requirement via email. A response will be provided within 48 hours.</p>
-
-    <div class="contact-box">
-      <a href="mailto:contact@mortdynamics.com">contact@mortdynamics.com</a>
+    <div class="fade-up">
+      <span class="section-label">Get In Touch</span>
+      <h2>Tell us what you need.</h2>
+      <p class="contact-para">We take on a small number of projects at a time so we can focus on doing each one properly. If you have a problem you want solving, send us a message and we will get back to you within 48 hours.</p>
     </div>
-
-    <p class="small" style="margin-top:16px;">
-      Payments are handled by bank transfer. Details are provided once work is agreed.
-    </p>
+    <div class="contact-details fade-up">
+      <div class="contact-detail-row">
+        <span class="contact-detail-label">Email</span>
+        <span class="contact-detail-value"><a href="mailto:hello@mortdynamics.co.uk">hello@mortdynamics.co.uk</a></span>
+      </div>
+      <div class="contact-detail-row">
+        <span class="contact-detail-label">Based in</span>
+        <span class="contact-detail-value">United Kingdom</span>
+      </div>
+      <div class="contact-detail-row">
+        <span class="contact-detail-label">Response time</span>
+        <span class="contact-detail-value">Within 48 hours</span>
+      </div>
+    </div>
+    <div class="fade-up">
+      <a href="mailto:hello@mortdynamics.co.uk" class="contact-cta-btn">Send us an email</a>
+      <span class="contact-fine-print">Payment is accepted via UK bank transfer. Full terms are confirmed in writing before any work begins.</span>
+    </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  © 2026 MortDynamics
+  <div class="container footer-inner">
+    <span class="footer-copy">© 2025 MortDynamics. All rights reserved.</span>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 </footer>
 
+<script>
+  // ── NAV SCROLL SHADOW
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── HAMBURGER MENU
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // ── INTERSECTION OBSERVER FADE-IN
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  fadeEls.forEach(el => observer.observe(el));
+
+  // ── HERO IMMEDIATE ANIMATE (already in viewport on load)
+  document.querySelectorAll('#hero .fade-up').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), i * 120);
+  });
+</script>
 </body>
 </html>
