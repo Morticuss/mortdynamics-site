@@ -5,16 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MortDynamics</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@600;800&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
-  background: #0a0a0b;
-  color: #f0efe8;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
+  background: #0b0b0c;
+  color: #eaeaea;
   line-height: 1.6;
 }
 
@@ -22,123 +21,147 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 18px 24px;
-  background: rgba(10,10,11,0.85);
-  backdrop-filter: blur(10px);
+  padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: rgba(11,11,12,0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   z-index: 100;
-}
-
-nav a {
-  text-decoration: none;
-  color: #f0efe8;
-  font-size: 0.9rem;
 }
 
 .logo {
   font-family: 'Syne', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 1.1rem;
 }
 
-.logo span { color: #e8d5a3; }
+.logo span { color: #d6c28a; }
+
+nav a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: #fff; }
 
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
-section { padding: 110px 0; }
+section {
+  padding: 120px 0;
+}
 
-.hero { padding-top: 140px; }
+.hero {
+  padding-top: 160px;
+}
 
 h1 {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3rem);
-  margin-bottom: 16px;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 20px;
 }
 
 h2 {
   font-family: 'Syne', sans-serif;
-  font-size: 1.8rem;
-  margin-bottom: 12px;
+  font-size: 2rem;
+  margin-bottom: 16px;
 }
 
 p {
-  color: #aaa;
-  max-width: 600px;
+  color: #9a9a9a;
+  max-width: 620px;
 }
 
 .btn {
   display: inline-block;
-  margin-top: 24px;
-  background: #e8d5a3;
+  margin-top: 28px;
+  background: linear-gradient(135deg, #e8d5a3, #cbb57a);
   color: #000;
-  padding: 12px 22px;
+  padding: 12px 24px;
   border-radius: 999px;
   text-decoration: none;
   font-size: 0.9rem;
-  transition: transform 0.15s, opacity 0.15s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .btn:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   opacity: 0.9;
 }
 
 .grid {
   display: grid;
-  gap: 16px;
-  margin-top: 30px;
+  gap: 20px;
+  margin-top: 40px;
 }
 
 .card {
-  background: #111114;
-  border: 1px solid #222;
-  padding: 20px;
-  border-radius: 12px;
-  transition: border 0.2s, background 0.2s;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 24px;
+  transition: all 0.25s ease;
 }
 
 .card:hover {
-  border-color: #333;
-  background: #151518;
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-3px);
 }
 
 .price {
-  font-size: 1.6rem;
-  color: #e8d5a3;
-  margin: 8px 0 12px;
+  font-size: 1.8rem;
   font-family: 'Syne', sans-serif;
+  color: #e8d5a3;
+  margin: 10px 0;
 }
 
-.small-text {
+.small {
   font-size: 0.85rem;
   color: #777;
 }
 
 .contact-box {
-  margin-top: 20px;
-  padding: 18px;
-  border-radius: 10px;
-  background: #111114;
-  border: 1px solid #222;
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 footer {
-  border-top: 1px solid #222;
-  padding: 30px 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 40px 20px;
   text-align: center;
   color: #666;
   font-size: 0.85rem;
 }
 
-@media (min-width: 700px) {
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
   .grid-2 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
 }
+
 </style>
 </head>
 
@@ -150,42 +173,24 @@ footer {
 </nav>
 
 <section class="hero">
-  <div class="container">
-    <h1>I build software that solves real problems.</h1>
+  <div class="container fade-in">
+    <h1>Custom software built to solve real operational problems</h1>
     <p>
-      Based in the UK. I create automations, fix broken systems, and build tools that save time and make things easier to run.
-      If something is slow, manual, or not working properly, I can sort it.
+      MortDynamics provides automation, system fixes, and custom tools designed to remove inefficiencies and improve how businesses operate.
+      Based in the UK. Response time within 48 hours.
     </p>
-    <a href="#contact" class="btn">Contact me</a>
-    <p class="small-text" style="margin-top:12px;">Response time: within 48 hours</p>
+    <a href="#contact" class="btn">Get in touch</a>
   </div>
 </section>
 
 <section>
   <div class="container">
-    <h2>What I do</h2>
+    <h2>Services</h2>
     <div class="grid grid-2">
-
-      <div class="card">
-        <strong>Automation</strong>
-        <p>Remove repetitive work like emails, reports, and data handling.</p>
-      </div>
-
-      <div class="card">
-        <strong>Fix issues</strong>
-        <p>Find and fix problems in websites, tools, or systems quickly.</p>
-      </div>
-
-      <div class="card">
-        <strong>Custom tools</strong>
-        <p>Build simple tools or apps that do exactly what you need.</p>
-      </div>
-
-      <div class="card">
-        <strong>Integrations</strong>
-        <p>Connect different systems so everything works together.</p>
-      </div>
-
+      <div class="card fade-in"><strong>Automation</strong><p>Reduction of manual processes including reporting, communication, and data handling.</p></div>
+      <div class="card fade-in"><strong>System fixes</strong><p>Diagnosis and resolution of broken or unreliable systems.</p></div>
+      <div class="card fade-in"><strong>Custom tools</strong><p>Development of internal tools and lightweight applications.</p></div>
+      <div class="card fade-in"><strong>Integrations</strong><p>Connecting platforms to ensure consistent data flow.</p></div>
     </div>
   </div>
 </section>
@@ -193,87 +198,37 @@ footer {
 <section>
   <div class="container">
     <h2>Example work</h2>
-
     <div class="grid grid-2">
-
-      <div class="card">
-        <strong>Automated invoice reminders</strong>
-        <p>System that checks unpaid invoices and sends follow up emails automatically.</p>
-      </div>
-
-      <div class="card">
-        <strong>Booking form fix</strong>
-        <p>Repaired a broken website form so enquiries started coming through again.</p>
-      </div>
-
-      <div class="card">
-        <strong>Staff rota tool</strong>
-        <p>Simple web tool for managing shifts instead of using spreadsheets.</p>
-      </div>
-
-      <div class="card">
-        <strong>Sales report automation</strong>
-        <p>Automatically generates and sends weekly reports from multiple data sources.</p>
-      </div>
-
+      <div class="card fade-in"><strong>Invoice reminder automation</strong><p>Automated follow up system for unpaid invoices.</p></div>
+      <div class="card fade-in"><strong>Booking system repair</strong><p>Resolved issues preventing customer enquiries.</p></div>
+      <div class="card fade-in"><strong>Shift management tool</strong><p>Replaced spreadsheets with a simple web interface.</p></div>
+      <div class="card fade-in"><strong>Reporting automation</strong><p>Generated scheduled reports from multiple sources.</p></div>
     </div>
-
   </div>
 </section>
 
 <section>
   <div class="container">
     <h2>Pricing</h2>
-    <p>You get a fixed price before I start. No surprises.</p>
-
     <div class="grid grid-3">
-
-      <div class="card">
+      <div class="card fade-in">
         <strong>Small</strong>
         <div class="price">£300 to £600</div>
-        <p>Simple fixes and small automations.</p>
-        <p class="small-text">No upfront payment. Paid after delivery.</p>
+        <p>Smaller fixes and automations.</p>
+        <p class="small">No upfront payment. Paid after delivery.</p>
       </div>
-
-      <div class="card">
+      <div class="card fade-in">
         <strong>Medium</strong>
         <div class="price">£800 to £1,500</div>
-        <p>Tools, integrations, or multi step work.</p>
-        <p class="small-text">30 percent upfront. Remaining paid after delivery.</p>
+        <p>Tools and integrations.</p>
+        <p class="small">30 percent upfront. Remaining after delivery.</p>
       </div>
-
-      <div class="card">
+      <div class="card fade-in">
         <strong>Large</strong>
         <div class="price">£2,000+</div>
-        <p>Bigger systems or full applications.</p>
-        <p class="small-text">30 percent upfront. Rest agreed before work starts.</p>
+        <p>Full systems or applications.</p>
+        <p class="small">30 percent upfront. Remaining agreed beforehand.</p>
       </div>
-
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <h2>How it works</h2>
-
-    <div class="grid">
-
-      <div class="card">
-        <strong>1. You contact me</strong>
-        <p>Explain what you need. It does not have to be technical.</p>
-      </div>
-
-      <div class="card">
-        <strong>2. I give you a plan</strong>
-        <p>You get a clear price and timeline before anything starts.</p>
-      </div>
-
-      <div class="card">
-        <strong>3. I build it</strong>
-        <p>You receive working software ready to use.</p>
-      </div>
-
     </div>
   </div>
 </section>
@@ -281,14 +236,14 @@ footer {
 <section id="contact">
   <div class="container">
     <h2>Contact</h2>
-    <p>Send me an email with what you need and I will get back to you within 48 hours.</p>
+    <p>Send a description of the requirement via email. A response will be provided within 48 hours.</p>
 
     <div class="contact-box">
-      📧 <a href="mailto:contact@mortdynamics.com">contact@mortdynamics.com</a>
+      <a href="mailto:contact@mortdynamics.com">contact@mortdynamics.com</a>
     </div>
 
-    <p class="small-text" style="margin-top:16px;">
-      Payments are handled by bank transfer. Details will be provided once the work is agreed.
+    <p class="small" style="margin-top:16px;">
+      Payments are handled by bank transfer. Details are provided once work is agreed.
     </p>
   </div>
 </section>
