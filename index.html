@@ -3,87 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MortDynamics — Custom Software & Automation</title>
+<title>MortDynamics</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: #0a0a0b;
   color: #f0efe8;
   font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
 }
 
 nav {
   position: fixed;
+  top: 0;
   width: 100%;
-  padding: 15px 30px;
-  background: rgba(10,10,11,0.9);
+  padding: 18px 24px;
+  background: rgba(10,10,11,0.85);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
 }
 
 nav a {
-  color: #f0efe8;
   text-decoration: none;
+  color: #f0efe8;
+  font-size: 0.9rem;
 }
 
-section {
-  padding: 120px 20px;
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+}
+
+.logo span { color: #e8d5a3; }
+
+.container {
   max-width: 1000px;
   margin: auto;
+  padding: 0 20px;
 }
 
-h1, h2 {
-  font-family: 'Syne', sans-serif;
-}
+section { padding: 110px 0; }
+
+.hero { padding-top: 140px; }
 
 h1 {
-  font-size: 2.8rem;
-  margin-bottom: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
 }
 
 p {
   color: #aaa;
-  line-height: 1.6;
+  max-width: 600px;
 }
 
 .btn {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 24px;
   background: #e8d5a3;
   color: #000;
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 12px 22px;
+  border-radius: 999px;
   text-decoration: none;
+  font-size: 0.9rem;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 30px;
 }
 
 .card {
   background: #111114;
   border: 1px solid #222;
   padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
+  border-radius: 12px;
+  transition: border 0.2s, background 0.2s;
 }
 
-.pricing {
-  display: grid;
-  gap: 20px;
+.card:hover {
+  border-color: #333;
+  background: #151518;
 }
 
 .price {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #e8d5a3;
-  margin: 10px 0;
+  margin: 8px 0 12px;
+  font-family: 'Syne', sans-serif;
+}
+
+.small-text {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.contact-box {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 10px;
+  background: #111114;
+  border: 1px solid #222;
 }
 
 footer {
-  padding: 30px;
-  text-align: center;
   border-top: 1px solid #222;
+  padding: 30px 20px;
+  text-align: center;
   color: #666;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 700px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
 }
 </style>
 </head>
@@ -91,116 +145,152 @@ footer {
 <body>
 
 <nav>
-  <div>Mort<span style="color:#e8d5a3">Dynamics</span></div>
+  <div class="logo">Mort<span>Dynamics</span></div>
   <a href="#contact">Contact</a>
 </nav>
 
-<section>
-  <h1>Software built for your business.</h1>
-  <p>
-    I build automations, fix broken systems, and create custom tools that save time and solve real problems.
-    You tell me what you need — I build it and deliver it ready to use.
-  </p>
-  <a href="#contact" class="btn">Start a project</a>
+<section class="hero">
+  <div class="container">
+    <h1>I build software that solves real problems.</h1>
+    <p>
+      Based in the UK. I create automations, fix broken systems, and build tools that save time and make things easier to run.
+      If something is slow, manual, or not working properly, I can sort it.
+    </p>
+    <a href="#contact" class="btn">Contact me</a>
+    <p class="small-text" style="margin-top:12px;">Response time: within 48 hours</p>
+  </div>
 </section>
 
 <section>
-  <h2>What I can do</h2>
+  <div class="container">
+    <h2>What I do</h2>
+    <div class="grid grid-2">
 
-  <div class="card">
-    <strong>Automation</strong>
-    <p>Automate repetitive tasks like emails, reports, data entry, or workflows.</p>
+      <div class="card">
+        <strong>Automation</strong>
+        <p>Remove repetitive work like emails, reports, and data handling.</p>
+      </div>
+
+      <div class="card">
+        <strong>Fix issues</strong>
+        <p>Find and fix problems in websites, tools, or systems quickly.</p>
+      </div>
+
+      <div class="card">
+        <strong>Custom tools</strong>
+        <p>Build simple tools or apps that do exactly what you need.</p>
+      </div>
+
+      <div class="card">
+        <strong>Integrations</strong>
+        <p>Connect different systems so everything works together.</p>
+      </div>
+
+    </div>
   </div>
-
-  <div class="card">
-    <strong>Bug fixes</strong>
-    <p>Fix broken websites, systems, or tools quickly without agency pricing.</p>
-  </div>
-
-  <div class="card">
-    <strong>Custom tools</strong>
-    <p>Build dashboards, internal tools, or small apps tailored exactly to your needs.</p>
-  </div>
-
-  <div class="card">
-    <strong>Integrations</strong>
-    <p>Connect your systems so they work together automatically.</p>
-  </div>
-
 </section>
 
 <section>
-  <h2>Pricing</h2>
-  <p>
-    Every project is fixed-price. You'll know exactly what you're paying before I start.
-  </p>
+  <div class="container">
+    <h2>Example work</h2>
 
-  <div class="pricing">
+    <div class="grid grid-2">
 
-    <div class="card">
-      <strong>Small projects</strong>
-      <div class="price">£300 – £600</div>
-      <p>
-        Simple automations, bug fixes, or small tasks.<br><br>
-        ✔ No upfront payment<br>
-        ✔ Pay after delivery
-      </p>
-    </div>
+      <div class="card">
+        <strong>Automated invoice reminders</strong>
+        <p>System that checks unpaid invoices and sends follow up emails automatically.</p>
+      </div>
 
-    <div class="card">
-      <strong>Medium projects</strong>
-      <div class="price">£800 – £1,500</div>
-      <p>
-        Tools, integrations, and multi-step automations.<br><br>
-        ✔ 30% upfront<br>
-        ✔ Remaining after delivery
-      </p>
-    </div>
+      <div class="card">
+        <strong>Booking form fix</strong>
+        <p>Repaired a broken website form so enquiries started coming through again.</p>
+      </div>
 
-    <div class="card">
-      <strong>Large projects</strong>
-      <div class="price">£2,000+</div>
-      <p>
-        Full applications or complex systems.<br><br>
-        ✔ 30% upfront<br>
-        ✔ Milestones or final payment after delivery
-      </p>
+      <div class="card">
+        <strong>Staff rota tool</strong>
+        <p>Simple web tool for managing shifts instead of using spreadsheets.</p>
+      </div>
+
+      <div class="card">
+        <strong>Sales report automation</strong>
+        <p>Automatically generates and sends weekly reports from multiple data sources.</p>
+      </div>
+
     </div>
 
   </div>
-
 </section>
 
 <section>
-  <h2>How it works</h2>
+  <div class="container">
+    <h2>Pricing</h2>
+    <p>You get a fixed price before I start. No surprises.</p>
 
-  <div class="card">
-    <strong>1. You contact me</strong>
-    <p>Describe what you need (doesn’t have to be technical).</p>
+    <div class="grid grid-3">
+
+      <div class="card">
+        <strong>Small</strong>
+        <div class="price">£300 to £600</div>
+        <p>Simple fixes and small automations.</p>
+        <p class="small-text">No upfront payment. Paid after delivery.</p>
+      </div>
+
+      <div class="card">
+        <strong>Medium</strong>
+        <div class="price">£800 to £1,500</div>
+        <p>Tools, integrations, or multi step work.</p>
+        <p class="small-text">30 percent upfront. Remaining paid after delivery.</p>
+      </div>
+
+      <div class="card">
+        <strong>Large</strong>
+        <div class="price">£2,000+</div>
+        <p>Bigger systems or full applications.</p>
+        <p class="small-text">30 percent upfront. Rest agreed before work starts.</p>
+      </div>
+
+    </div>
   </div>
+</section>
 
-  <div class="card">
-    <strong>2. I scope it</strong>
-    <p>I’ll reply with a clear plan, timeline, and fixed price.</p>
+<section>
+  <div class="container">
+    <h2>How it works</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <strong>1. You contact me</strong>
+        <p>Explain what you need. It does not have to be technical.</p>
+      </div>
+
+      <div class="card">
+        <strong>2. I give you a plan</strong>
+        <p>You get a clear price and timeline before anything starts.</p>
+      </div>
+
+      <div class="card">
+        <strong>3. I build it</strong>
+        <p>You receive working software ready to use.</p>
+      </div>
+
+    </div>
   </div>
-
-  <div class="card">
-    <strong>3. I build it</strong>
-    <p>You get working software delivered and ready to use.</p>
-  </div>
-
 </section>
 
 <section id="contact">
-  <h2>Contact</h2>
-  <p>
-    Email me directly and describe what you need. I’ll respond within 24 hours.
-  </p>
+  <div class="container">
+    <h2>Contact</h2>
+    <p>Send me an email with what you need and I will get back to you within 48 hours.</p>
 
-  <div class="card">
-    📧 <a href="mailto:contact@mortdynamics.com">contact@mortdynamics.com</a>
+    <div class="contact-box">
+      📧 <a href="mailto:contact@mortdynamics.com">contact@mortdynamics.com</a>
+    </div>
+
+    <p class="small-text" style="margin-top:16px;">
+      Payments are handled by bank transfer. Details will be provided once the work is agreed.
+    </p>
   </div>
-
 </section>
 
 <footer>
